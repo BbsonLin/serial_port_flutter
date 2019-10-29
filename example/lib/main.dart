@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Flutter Serial Port Example",
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
