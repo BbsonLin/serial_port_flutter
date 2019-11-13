@@ -50,8 +50,8 @@ class SerialPort {
 
   bool get isConnected => _deviceConnected;
 
-  Stream get receiveStream {
-    _eventStream = _eventChannel.receiveBroadcastStream();
+  Stream<Uint8List> get receiveStream {
+    _eventStream = _eventChannel.receiveBroadcastStream().map<Uint8List>((dynamic value) => value);
     return _eventStream;
   }
 
