@@ -63,7 +63,7 @@ public class FlutterSerialPortPlugin implements MethodCallHandler, EventChannel.
       mHandler.post(new Runnable() {
         @Override
         public void run() {
-          Log.d(TAG, "eventsink: " + buffer.toString());
+          // Log.d(TAG, "eventsink: " + buffer.toString());
           mEventSink.success(Arrays.copyOfRange(buffer, 0, size));
         }
       });
@@ -90,6 +90,7 @@ public class FlutterSerialPortPlugin implements MethodCallHandler, EventChannel.
     case "open":
       final String devicePath = call.argument("devicePath");
       final int baudrate = call.argument("baudrate");
+      Log.d(TAG, "Open " + devicePath + ", baudrate: " + baudrate);
       Boolean openResult = openDevice(devicePath, baudrate);
       result.success(openResult);
       break;
@@ -172,7 +173,7 @@ public class FlutterSerialPortPlugin implements MethodCallHandler, EventChannel.
   private void writeData(byte[] data) {
     try {
       mOutputStream.write(data);
-      mOutputStream.write('\n');
+      // mOutputStream.write('\n');
     } catch (IOException e) {
       Log.e(TAG, e.toString());
     }

@@ -5,3 +5,20 @@
 .pub/
 
 build/
+
+# Android
+android/.project
+android/.classpath
+android/**/.settings/
+
+example/android/.project
+example/android/.classpath
+example/android/**/.settings/
+
+example/android/app/.project
+example/android/app/.classpath
+example/android/app/**/.settings/
+
+
+# Visual Studio Code
+.vscode/
