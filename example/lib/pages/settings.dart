@@ -20,9 +20,15 @@ class _SettingPageState extends State<SettingPage> {
       body: ListView(
         children: <Widget>[
           ListTile(
-            title: Text("Select device"),
+            title: Text("Device"),
             onTap: () {
               Navigator.of(context).pushNamed("/setting/device");
+            },
+          ),
+          ListTile(
+            title: Text("Baudrate"),
+            onTap: () {
+              Navigator.of(context).pushNamed("/setting/baudrate");
             },
           )
         ],

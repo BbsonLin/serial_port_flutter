@@ -98,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                       store.device != null
                           ? Text("${store.device.name} , ${store.device.path}")
                           : Text("Please select device"),
+                      Text("Baudrate: ${store.baudrate}"),
                       Row(
                         children: <Widget>[
                           RaisedButton(
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                                                     milliseconds: 500))));
                                     if (!isPortOpened) {
                                       var serialPort = await FlutterSerialPort
-                                          .createSerialPort(store.device);
+                                          .createSerialPort(store.device, store.baudrate);
                                       bool openResult = await serialPort.open();
                                       setState(() {
                                         _serialPort = serialPort;

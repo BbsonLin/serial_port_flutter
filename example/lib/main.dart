@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_serial_port_example/pages/home.dart';
+import 'package:flutter_serial_port_example/pages/setting_baudrate.dart';
 import 'package:flutter_serial_port_example/pages/setting_device.dart';
 import 'package:flutter_serial_port_example/pages/settings.dart';
 import 'package:flutter_serial_port_example/stores/app.dart';
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         "/setting": (context) => SettingPage(),
         "/setting/device": (context) => SettingDevicePage(),
+        "/setting/baudrate": (context) => SettingBaudratePage(),
       },
       home: HomePage(),
     );
