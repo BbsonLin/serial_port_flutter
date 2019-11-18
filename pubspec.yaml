@@ -1,8 +1,8 @@
-name: flutter_serial_port
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+name: serial_port_flutter
+description: A Flutter plugin integrated with Android-SerialPort-API
+version: 0.0.2
+author: Bobson Lin <bobson801104@gmail.com>
+homepage: https://github.com/BbsonLin/flutter_serial_port
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

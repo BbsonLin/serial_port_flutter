@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_serial_port_example/pages/home.dart';
-import 'package:flutter_serial_port_example/pages/setting_baudrate.dart';
-import 'package:flutter_serial_port_example/pages/setting_device.dart';
-import 'package:flutter_serial_port_example/pages/settings.dart';
-import 'package:flutter_serial_port_example/stores/app.dart';
+import 'package:serial_port_flutter_example/pages/home.dart';
+import 'package:serial_port_flutter_example/pages/setting_baudrate.dart';
+import 'package:serial_port_flutter_example/pages/setting_device.dart';
+import 'package:serial_port_flutter_example/pages/settings.dart';
+import 'package:serial_port_flutter_example/stores/app.dart';
 import 'package:provider/provider.dart';
 
 void main() {

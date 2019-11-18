@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_serial_port_example/constants.dart';
-import 'package:flutter_serial_port_example/stores/app.dart';
+import 'package:serial_port_flutter_example/constants.dart';
+import 'package:serial_port_flutter_example/stores/app.dart';
 import 'package:provider/provider.dart';
 
 class SettingBaudratePage extends StatelessWidget {

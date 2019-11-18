@@ -1,5 +1,5 @@
-name: flutter_serial_port_example
-description: Demonstrates how to use the flutter_serial_port plugin.
+name: serial_port_flutter_example
+description: Demonstrates how to use the serial_port_flutter plugin.
 publish_to: 'none'
 
 environment:
@@ -23,7 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_serial_port:
+  serial_port_flutter:
     path: ../
 
 # For information on the generic Dart part of this file, see the

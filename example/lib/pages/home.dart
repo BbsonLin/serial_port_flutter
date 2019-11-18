@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stream_transform/stream_transform.dart';
 
-import 'package:flutter_serial_port/flutter_serial_port.dart';
-import 'package:flutter_serial_port_example/stores/app.dart';
-import 'package:flutter_serial_port_example/utils.dart';
+import 'package:serial_port_flutter/serial_port_flutter.dart';
+import 'package:serial_port_flutter_example/stores/app.dart';
+import 'package:serial_port_flutter_example/utils.dart';
 
 class HomePage extends StatefulWidget {
   @override

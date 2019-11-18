@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_serial_port/flutter_serial_port.dart';
-import 'package:flutter_serial_port_example/stores/app.dart';
+import 'package:serial_port_flutter/serial_port_flutter.dart';
+import 'package:serial_port_flutter_example/stores/app.dart';
 import 'package:provider/provider.dart';
 
 class SettingDevicePage extends StatefulWidget {
