@@ -27,8 +27,8 @@ class FlutterSerialPort {
     return deviceList;
   }
 
-  static Future createSerialPort(Device device) async {
-    return SerialPort(_channel.name, device, 9600);
+  static Future createSerialPort(Device device, int baudrate) async {
+    return SerialPort(_channel.name, device, baudrate);
   }
 }
 
@@ -53,6 +53,11 @@ class SerialPort {
   Stream<Uint8List> get receiveStream {
     _eventStream = _eventChannel.receiveBroadcastStream().map<Uint8List>((dynamic value) => value);
     return _eventStream;
+  }
+
+  @override
+  String toString() {
+    return "SerialPort($device, $baudrate)";
   }
 
   Future<bool> open() async {
