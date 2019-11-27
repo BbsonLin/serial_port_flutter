@@ -46,7 +46,7 @@ public class FlutterSerialPortPlugin implements MethodCallHandler, EventChannel.
           if (mInputStream == null)
             return;
           size = mInputStream.read(buffer);
-          Log.d(TAG, "read size: " + String.valueOf(size));
+          // Log.d(TAG, "read size: " + String.valueOf(size));
           if (size > 0) {
             onDataReceived(buffer, size);
           }
