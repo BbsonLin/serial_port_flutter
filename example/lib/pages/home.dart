@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 import 'package:stream_transform/stream_transform.dart';
@@ -194,7 +193,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   scrollToBottom() {
-    print("scrollToBottom ${_scrollController.position}");
+    // print("scrollToBottom ${_scrollController.position}");
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 500),

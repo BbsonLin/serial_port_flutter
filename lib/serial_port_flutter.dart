@@ -3,19 +3,17 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
+/// 
 class FlutterSerialPort {
   static const MethodChannel _channel = const MethodChannel('serial_port');
 
+  /// Default plugin function
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
-  static Future<String> listDevice() async {
-    String device = await _channel.invokeMethod("getAllDevices");
-    return device;
-  }
-
+  /// List all devices
   static Future<List<Device>> listDevices() async {
     List devices = await _channel.invokeMethod("getAllDevices");
     List devicesPath = await _channel.invokeMethod("getAllDevicesPath");
@@ -27,11 +25,14 @@ class FlutterSerialPort {
     return deviceList;
   }
 
+  /// Create an [SerialPort] instance
   static Future createSerialPort(Device device, int baudrate) async {
     return SerialPort(_channel.name, device, baudrate);
   }
 }
 
+/// [SerialPort] instance manage all channels between Android and Flutter, [Device] object.
+/// Also provides handy methods, like [open], [close], [write] and [receiveStream].
 class SerialPort {
   MethodChannel _channel;
   EventChannel _eventChannel;
@@ -50,6 +51,7 @@ class SerialPort {
 
   bool get isConnected => _deviceConnected;
 
+  /// Stream(Event) coming from Android
   Stream<Uint8List> get receiveStream {
     _eventStream = _eventChannel.receiveBroadcastStream().map<Uint8List>((dynamic value) => value);
     return _eventStream;
@@ -60,6 +62,7 @@ class SerialPort {
     return "SerialPort($device, $baudrate)";
   }
 
+  /// Open device
   Future<bool> open() async {
     bool openResult = await _channel.invokeMethod(
         "open", {'devicePath': device.path, 'baudrate': baudrate});
@@ -71,6 +74,7 @@ class SerialPort {
     return openResult;
   }
 
+  /// Close device
   Future<bool> close() async {
     bool closeResult = await _channel.invokeMethod("close");
 
@@ -81,11 +85,13 @@ class SerialPort {
     return closeResult;
   }
 
+  /// Write data to device
   Future<void> write(Uint8List data) async {
     return await _channel.invokeMethod("write", {"data": data});
   }
 }
 
+/// [Device] contains device information(name and path).
 class Device {
   String name;
   String path;
