@@ -1,3 +1,12 @@
+## 0.1.0
+
+* Add constants.dart.
+* Fix Android build failed.
+* Complete README.md for 0.1.0
+* Complete doc strings.
+
+---
+
 ## 0.0.4
 
 * Add functions for String / Hex exchanging. (`utils.dart`)
