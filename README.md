@@ -59,3 +59,7 @@ Change the `android:label` in `AndroidManifest.xml`.
 
 Check out this commit [fix: 🐛 Fix Android build failed issue](https://github.com/BbsonLin/serial_port_flutter/commit/2ae93ef70b8a5897b47013af890c946da84b827f)
 
+### App crashed on Android x86
+
+This is all about Android permission problem.
+Please check out [Issue #4](https://github.com/BbsonLin/serial_port_flutter/issues/4#issuecomment-646545598).
