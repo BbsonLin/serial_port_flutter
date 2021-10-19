@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:stream_transform/stream_transform.dart';
-
 import 'package:serial_port_flutter/serial_port_flutter.dart';
 import 'package:serial_port_flutter_example/stores/app.dart';
 import 'package:serial_port_flutter_example/utils.dart';
@@ -18,10 +17,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController _dataController = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  SerialPort _serialPort;
-  StreamSubscription _subscription;
-  bool isPortOpened = false;
-  bool isHexMode = false;
+  SerialPort? _serialPort;
+  bool? isPortOpened = false;
+  bool? isHexMode = false;
   List<Widget> _historyData = [];
 
   @override
@@ -94,63 +92,49 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(width: 8.0),
                   Column(
                     children: <Widget>[
-                      store.device != null
-                          ? Text("${store.device.name} , ${store.device.path}")
-                          : Text("Please select device"),
+                      store.device != null ? Text("${store.device!.name} , ${store.device!.path}") : Text("Please select device"),
                       Text("Baudrate: ${store.baudrate}"),
                       Row(
                         children: <Widget>[
-                          RaisedButton(
-                            child: !isPortOpened ? Text("Open") : Text("Close"),
+                          ElevatedButton(
+                            child: !isPortOpened! ? Text("Open") : Text("Close"),
                             onPressed: store.device != null
                                 ? () async {
-                                    final debounceTransformer =
-                                        StreamTransformer<Uint8List,
-                                                dynamic>.fromBind(
-                                            (s) => s.transform(debounceBuffer(
-                                                const Duration(
-                                                    milliseconds: 500))));
-                                    if (!isPortOpened) {
-                                      var serialPort = await FlutterSerialPort
-                                          .createSerialPort(store.device, store.baudrate);
-                                      bool openResult = await serialPort.open();
+                                    final debounceTransformer = StreamTransformer<Uint8List, dynamic>.fromBind((s) => (s.debounceBuffer(const Duration(milliseconds: 500))));
+                                    if (!isPortOpened!) {
+                                      var serialPort = await FlutterSerialPort.createSerialPort(store.device!, store.baudrate);
+                                      bool? openResult = await serialPort.open();
                                       setState(() {
                                         _serialPort = serialPort;
                                         isPortOpened = openResult;
                                       });
-                                      _subscription = _serialPort.receiveStream
-                                          .transform(debounceTransformer)
-                                          .listen((recv) {
+                                      _serialPort!.receiveStream.transform(debounceTransformer).listen((recv) {
                                         print("Receive: $recv");
-                                        String recvData =
-                                            formatReceivedData(recv);
+                                        String? recvData = formatReceivedData(recv);
                                         setState(() {
-                                          _historyData
-                                              .add(Text(">>> $recvData"));
+                                          _historyData.add(Text(">>> $recvData"));
                                         });
                                       });
                                       print("openResult: $openResult");
                                     } else {
-                                      bool closeResult =
-                                          await _serialPort.close();
+                                      bool closeResult = await _serialPort!.close();
                                       setState(() {
                                         _serialPort = null;
                                         isPortOpened = !closeResult;
                                       });
-                                      _subscription = null;
                                       print("closeResult: $closeResult");
                                     }
                                   }
                                 : null,
                           ),
                           SizedBox(width: 8.0),
-                          RaisedButton(
+                          ElevatedButton(
                             child: Text("Send"),
                             onPressed: store.device != null
                                 ? () {
                                     var sentData = formatSentData(_dataController.text);
                                     print("Send: $sentData");
-                                    _serialPort.write(Uint8List.fromList(sentData));
+                                    _serialPort!.write(Uint8List.fromList(sentData));
                                     setState(() {
                                       _historyData.add(Text("<<< ${_dataController.text}"));
                                     });
@@ -162,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: <Widget>[
                           Checkbox(
-                            onChanged: (bool value) {
+                            onChanged: (bool? value) {
                               setState(() {
                                 isHexMode = value;
                               });
@@ -171,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text("Hex"),
                           SizedBox(width: 16.0),
-                          RaisedButton(
+                          ElevatedButton(
                             child: Text("Clear"),
                             onPressed: () {
                               setState(() {
@@ -201,18 +185,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String formatReceivedData(recv) {
-    if (isHexMode) {
-      return recv
-          .map((List<int> char) => char.map((c) => intToHex(c)).join())
-          .join();
+  String? formatReceivedData(recv) {
+    if (isHexMode!) {
+      return recv.map((List<int> char) => char.map((c) => intToHex(c)).join()).join();
     } else {
       return recv.map((List<int> char) => String.fromCharCodes(char)).join();
     }
   }
 
   List<int> formatSentData(String sendStr) {
-    if (isHexMode) {
+    if (isHexMode!) {
       return hexToUnits(sendStr);
     } else {
       return sendStr.codeUnits;

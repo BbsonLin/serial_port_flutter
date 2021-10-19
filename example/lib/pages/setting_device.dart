@@ -10,7 +10,7 @@ class SettingDevicePage extends StatefulWidget {
 }
 
 class _SettingDevicePageState extends State<SettingDevicePage> {
-  List<Device> deviceList;
+  List<Device>? deviceList;
 
   @override
   void initState() {
@@ -33,14 +33,14 @@ class _SettingDevicePageState extends State<SettingDevicePage> {
             case ConnectionState.done:
               if (snapshot.hasError) return Text('Error: ${snapshot.error}');
               return ListView.separated(
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text(snapshot.data[index].name),
-                    subtitle: Text(snapshot.data[index].path),
+                    title: Text(snapshot.data![index].name),
+                    subtitle: Text(snapshot.data![index].path),
                     onTap: () {
                       Provider.of<AppModel>(context, listen: false)
-                          .updateDevice(snapshot.data[index]);
+                          .updateDevice(snapshot.data![index]);
                       Navigator.of(context).popUntil(ModalRoute.withName("/"));
                     },
                   );
